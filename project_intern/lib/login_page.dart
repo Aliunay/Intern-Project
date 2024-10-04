@@ -17,72 +17,103 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Form(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-               TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+      backgroundColor: Colors.grey[100],
+      body: Center(
+        child: Form(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "Giriş Yap",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
                     ),
-                    labelText: "Kulanıcı Adı",
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder()
-                    
-                  ),
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return "Kullanıcı adınızı giriniz";
-                    } else {
-                      return "null";
-                    }
-                  },
-                  onSaved: (value) {
-                    username = value ?? '';
-                  },
-                ),
-              SizedBox(height: 10.0 ),
-              TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
+                    SizedBox(height: 20.0),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Kullanıcı Adı",
+                        labelStyle: TextStyle(color: Colors.black54),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Kullanıcı adınızı giriniz";
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        username = value ?? '';
+                      },
                     ),
-                    labelText: "Şifre",
-                    labelStyle: TextStyle(color: Colors.black),
-                    border: OutlineInputBorder()
-                    
-                  ),
-                  validator: (value){
-                    if (value == null || value.isEmpty) {
-                      return "Şifrenizi giriniz";
-                    } else {
-                      return "null";
-                    }
-                  },
-                  onSaved: (value) {
-                    username = value ?? '';
-                  },
+                    SizedBox(height: 10.0),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        labelText: "Şifre",
+                        labelStyle: TextStyle(color: Colors.black54),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Şifrenizi giriniz";
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        password = value ?? '';
+                      },
+                    ),
+                    SizedBox(height: 20.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DataPage()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 175, 184, 184),
+                      ),
+                      child: Text(
+                        "Giriş Yap",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 50.0),
-                _LoginButton()
-            ],
+              ),
+            ),
           ),
-        )),
-
+        ),
+      ),
     );
   }
-
-  Widget _LoginButton() => 
-    ElevatedButton(onPressed: (){
-      Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DataPage()),
-                    );
-    }, child: Text("Giriş Yap"));
-
 }
